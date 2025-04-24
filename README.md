@@ -39,6 +39,20 @@ The generated and stored pickle files (`.pkl`) for count encoders, label encoder
 
 ---
 
+### ✨ Feature Analysis & Selection
+
+This stage involved exploring the characteristics of the features and applying dimensionality reduction techniques. Our work included:
+
+- **Feature Selection**: Utilizing Principal Component Analysis (PCA) and Linear Discriminant Analysis (LDA) to reduce the dimensionality of the feature space and identify the most informative features. We experimented with retaining 95% of the variance with PCA and selecting a corresponding number of features with the largest coefficients from LDA.
+- **Distribution Shift Analysis**: Employing statistical tests (KS 2-sample and Chi-square contingency tests) to rigorously assess the presence and extent of distribution differences between the training and test datasets for both continuous and categorical features.
+
+Notebooks detailing our feature selection process using PCA and LDA are located here:
+🔗 [`Feature Analysis`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Feature%20Analysis)
+
+The Jupyter Notebook demonstrating the analysis of distribution shift between the training and test sets can also be found in this directory.
+
+---
+
 ### 🧠 Model Training
 
 The training of our machine learning models was conducted on the locally preprocessed datasets. We explored a range of architectures:
@@ -55,12 +69,11 @@ The trained model weights and configurations are saved for reproducibility and e
 
 ---
 
-### 📊 Data Exploration & Feature Validation
+### 🧐 Data Exploration (Initial Brainstorming)
 
-Our initial exploration focused on understanding the dataset's characteristics, including data types, missing values, and the crucial issue of distribution shift between the training and test sets. We employed techniques like visualization and statistical tests (KS 2-sample and Chi-square) to quantify these differences, which informed our feature selection strategies.
+This directory contains our initial, more exploratory attempts at understanding the data. It includes brainstorming code and various random approaches we experimented with at the beginning of the project to gain initial insights into the dataset's structure and potential challenges.
 
-Notebooks documenting our exploratory data analysis and feature validation processes can be found here:
-🔗 [`Data Exploration and Initial Approaches`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Data%20Exploration)
+🔗 [`Data Exploration`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Data%20Exploration)
 
 ---
 
@@ -78,11 +91,14 @@ Scripts used for generating Kaggle submission files are located here:
 
 Future work could explore:
 
-- More sophisticated techniques for addressing the observed distribution shift
-- Investigating alternative neural network architectures like Resnet to keep training on deeper architectures.
+- More sophisticated techniques for addressing the observed distribution shift, beyond simply training on the separate datasets.
+- Investigating alternative neural network architectures, such as Recurrent Neural Networks (RNNs) or Transformer networks, to capture potential sequential patterns in the telemetry data.
 - Further experimentation with ensemble methods, combining the strengths of different models (e.g., stacking).
 - If access were available, incorporating external datasets (as done by top competitors) to enrich the feature set with information like software release dates and update intervals.
-
+- Optimizing model inference speed for real-world deployment scenarios.
 
 ---
 
+## ⚙️ Installation/Setup (Optional)
+
+To reproduce parts of this project (assuming access to the preprocessed data and saved artifacts), the following Python libraries are required:
