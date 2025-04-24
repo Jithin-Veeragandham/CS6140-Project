@@ -2,7 +2,7 @@
 
 > Predicting malware occurrences on machines using real-world telemetry data provided by Microsoft.
 
-##  Contributors:
+## 👥 Contributors
 
 - Jithin Veeragandham  
 - Rishi Srikaanth  
@@ -16,71 +16,76 @@ With over a billion enterprise and consumer customers, Microsoft takes cybersecu
 
 The goal of this project is to develop machine learning models that can effectively identify potential malware infections based on rich, anonymized telemetry data. The dataset reflects real-world challenges such as missing values, mixed data types, and distribution shifts between training and test sets.
 
-This project is based on the official Kaggle competition:
-
 🔗 [Microsoft Malware Prediction – Kaggle Competition](https://www.kaggle.com/competitions/microsoft-malware-prediction/overview)
 
 ---
 
-## 📁 Project Structure & Components
+## 🗂️ Project Structure & Components
 
-Due to the large size of the Microsoft Malware Prediction dataset, we did not upload any raw or processed data files to this repository. Instead, all data processing was performed locally. To streamline the training pipeline, we saved processed versions of the data and preprocessing artifacts such as encoders and scalers.
+Due to the massive size of the dataset, we couldn’t upload raw or processed data directly to GitHub. To make modeling feasible and reproducible, we preprocessed the datasets locally and reused the saved encoders and scalers for consistent encoding across training and testing.
 
-### 🧪 Data Encoding
+---
 
-We employed two types of encodings for training our models:
+### ⚙️ Data Encoding & Preprocessing
 
-1. **Initial Encoding**
-2. **Advanced Encoding**
+We used two encoding strategies across the project:
 
-After feature engineering and scaling, we saved the relevant encoders and scalers as `.pkl` files:
+- **Initial Encoding**: Basic transformations to quickly get started.
+- **Advanced Encoding**: Enhanced feature engineering and scaling.
 
-🔗 [Encoder Pickle Files (Initial & Advanced)](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Encoder%20pickle%20Files)
+Encoding and data transformation scripts can be found here:  
+🔗 [`Encode Datasets`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Encode%20Datasets)
 
-This directory contains:
-- Count Encoders  
-- Label Encoders  
-- Standard Scalers  
+As part of this, we generated and stored pickle files (`.pkl`) for:
+- Count encoders  
+- Label encoders  
+- Standard scalers  
 
-for both the initial and advanced encodings. These were reused across all model training pipelines.
+These were **not used directly in training** but are crucial for **re-encoding test data** consistently. You can find them here:  
+🔗 [`Encoder Pickle Files`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Encoder%20pickle%20Files)
 
 ---
 
 ### 🧠 Model Training
 
-The [`Training`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Training) folder contains Jupyter notebooks used to train:
-- Neural networks  
-- Simple feedforward models  
+The actual training of machine learning models was performed on the locally preprocessed datasets. We trained:
+- Neural Networks  
+- Feedforward Deep Learning models  
 - Tree-based models (LightGBM, XGBoost)
 
-We trained each model on both encoding schemes. The trained weights for all models are available here:
+Training notebooks are available in this folder:  
+🔗 [`Training`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Training)
 
-🔗 [Saved Models](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Saved%20Models)
+Corresponding model weights are saved under:  
+🔗 [`Saved Models`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Saved%20Models)
 
-To evaluate any model, you can download the corresponding weights and run them on the pre-encoded test data using the matching encoders.
-
----
-
-### ⚙️ Encoding Scripts
-
-The [`Encode Datasets`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Encode%20Datasets) folder contains the scripts used to generate the encoded datasets and save the encoders/scalers used across training.
+These can be loaded to reproduce or evaluate predictions using the matching encoded test data.
 
 ---
 
-### 🔍 Data Exploration & Initial Analysis
+### 📊 Data Exploration & Feature Validation
 
-The [`Data Exploration and Initial Approaches`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Data%20Exploration%20and%20Initial%20Approaches) folder contains:
-- Notebooks identifying **distribution shifts** between train/test sets  
-- Initial exploratory analyses and brainstorming (Exploration1, Exploration2)
+Our early investigations into the dataset involved identifying key issues like **distribution shift** between training and test datasets. This also helped us drive our feature selection decisions.
 
-These helped us understand the structure and challenges of the dataset before finalizing our modeling approach.
+All notebooks related to EDA and initial exploration can be found here:  
+🔗 [`Data Exploration and Initial Approaches`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Data%20Exploration%20and%20Initial%20Approaches)
 
 ---
 
-### 📤 Submissions
+### 📤 Kaggle Submissions
 
-The [`Submissions`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Submissions) folder includes all scripts used to generate `.csv` submission files for Kaggle.
+The final `.csv` files generated for submission to Kaggle were built using scripts that:
+- Load trained models
+- Apply consistent encodings
+- Format predictions per competition guidelines
 
-These scripts read predictions from the trained models, decode any label encodings (if necessary), and format the outputs according to the Kaggle submission requirements.
+All such scripts are stored here:  
+🔗 [`Submissions`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Submissions)
 
+---
 
+## ✅ Summary
+
+This repository encapsulates our end-to-end pipeline for tackling Microsoft’s malware prediction problem — from encoding strategies and data exploration to model training and final submissions. Due to storage constraints, raw data and processed datasets were handled locally, but the full codebase is provided to ensure full reproducibility and transparency.
+
+---
