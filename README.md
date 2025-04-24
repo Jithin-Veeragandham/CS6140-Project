@@ -97,8 +97,5 @@ Future work could explore:
 - If access were available, incorporating external datasets (as done by top competitors) to enrich the feature set with information like software release dates and update intervals.
 - Optimizing model inference speed for real-world deployment scenarios.
 
----
 
-## ⚙️ Installation/Setup (Optional)
 
-To reproduce parts of this project (assuming access to the preprocessed data and saved artifacts), the following Python libraries are required:
