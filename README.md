@@ -50,7 +50,7 @@ These were **not used directly in training** but are crucial for **re-encoding t
 
 The actual training of machine learning models was performed on the locally preprocessed datasets. We trained:
 - Neural Networks  
-- Feedforward Deep Learning models  
+- Simple Linear classifiers like Perceptron, Linear SVM and Logistic Regression
 - Tree-based models (LightGBM, XGBoost)
 
 Training notebooks are available in this folder:  
