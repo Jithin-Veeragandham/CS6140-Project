@@ -42,7 +42,7 @@ As part of this, we generated and stored pickle files (`.pkl`) for:
 - Standard scalers  
 
 These were **not used directly in training** but are crucial for **re-encoding test data** consistently. You can find them here:  
-🔗 [`Encoder Pickle Files`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Encoder%20pickle%20Files)
+🔗 [`Encoder Pickle Files`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Encode%20Datasets/Encoder%20pickle%20Files)
 
 ---
 
