@@ -1,20 +1,18 @@
 # CS6140 Machine Learning Project - Microsoft Malware Prediction
 
-> Predicting malware occurrences on machines using real-world telemetry data provided by Microsoft.
+> Leveraging machine learning to predict malware infections using Microsoft's extensive telemetry data. Our project encompasses rigorous data preprocessing, insightful feature engineering, and a comparative analysis of various classification models, including tree-based algorithms and neural networks.
 
 ## 👥 Contributors
 
-- Jithin Veeragandham  
-- Rishi Srikaanth  
-- Andrei Biswas  
+- Jithin Veeragandham
+- Rishi Srikaanth
+- Andrei Biswas
 
 ---
 
 ## 📌 Problem Statement
 
-With over a billion enterprise and consumer customers, Microsoft takes cybersecurity very seriously. As part of their initiative to improve global protection standards, Microsoft released a large-scale telemetry dataset, challenging the data science community to predict whether a machine will be affected by malware in the near future.
-
-The goal of this project is to develop machine learning models that can effectively identify potential malware infections based on rich, anonymized telemetry data. The dataset reflects real-world challenges such as missing values, mixed data types, and distribution shifts between training and test sets.
+The escalating sophistication and proliferation of malware pose a significant threat to global cybersecurity. Traditional signature-based detection methods struggle to keep pace with evolving threats. This project addresses this challenge by applying advanced machine learning techniques to predict malware infections using a large-scale, anonymized telemetry dataset provided by Microsoft through the Kaggle competition. The objective is to build robust models capable of identifying subtle patterns indicative of impending malware attacks.
 
 🔗 [Microsoft Malware Prediction – Kaggle Competition](https://www.kaggle.com/competitions/microsoft-malware-prediction/overview)
 
@@ -22,70 +20,82 @@ The goal of this project is to develop machine learning models that can effectiv
 
 ## 🗂️ Project Structure & Components
 
-Due to the massive size of the dataset, we couldn’t upload raw or processed data directly to GitHub. To make modeling feasible and reproducible, we preprocessed the datasets locally and reused the saved encoders and scalers for consistent encoding across training and testing.
+Due to the substantial size of the Microsoft Malware Prediction dataset, the raw and processed data are managed locally. To ensure reproducibility and efficient experimentation, we implemented a strategy of saving preprocessing artifacts (encoders, scalers) which are then consistently applied across training and testing phases.
 
 ---
 
 ### ⚙️ Data Encoding & Preprocessing
 
-We used two encoding strategies across the project:
+We employed two distinct encoding strategies to prepare the data for our machine learning models:
 
-- **Initial Encoding**: Basic transformations to quickly get started.
-- **Advanced Encoding**: Enhanced feature engineering and scaling.
+- **Initial Encoding**: A foundational approach involving frequency/count encoding for high-cardinality categorical features (e.g., `AppVersion`, `Census_OSVersion`), label encoding for lower-cardinality string features after text normalization, and imputation of missing values with -1. This strategy aimed for a quick baseline for tree-based models.
+- **Advanced Encoding**: An enhanced strategy incorporating domain-inspired feature engineering (e.g., screen area, aspect ratio, disk usage ratios, a binary "magic\_4" feature based on antivirus states) and count encoding for high-cardinality features. This was designed to potentially improve model performance by capturing more complex relationships in the data.
 
-Encoding and data transformation scripts can be found here:  
+Encoding and data transformation scripts, along with the logic for saving preprocessing artifacts, can be found here:
 🔗 [`Encode Datasets`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Encode%20Datasets)
 
-As part of this, we generated and stored pickle files (`.pkl`) for:
-- Count encoders  
-- Label encoders  
-- Standard scalers  
-
-These were **not used directly in training** but are crucial for **re-encoding test data** consistently. You can find them here:  
+The generated and stored pickle files (`.pkl`) for count encoders, label encoders, and standard scalers (used for consistent test data encoding) are located here:
 🔗 [`Encoder Pickle Files`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Encode%20Datasets/Encoder%20pickle%20Files)
 
 ---
 
 ### 🧠 Model Training
 
-The actual training of machine learning models was performed on the locally preprocessed datasets. We trained:
-- Neural Networks  
-- Simple Linear classifiers like Perceptron, Linear SVM and Logistic Regression
-- Tree-based models (LightGBM, XGBoost)
+The training of our machine learning models was conducted on the locally preprocessed datasets. We explored a range of architectures:
 
-Training notebooks are available in this folder:  
+- **Neural Networks**: Feedforward networks with 2, 3, and 4 hidden layers, employing ReLU activation, Batch Normalization, and Dropout for regularization. Trained using `BCEWithLogitsLoss` and the Adam optimizer with learning rate scheduling based on validation loss.
+- **Simple Linear Classifiers**: Logistic Regression, Support Vector Machine (Linear kernel), and Perceptron, used as baseline models to assess data linear separability.
+- **Tree-based Models**: LightGBM and XGBoost, chosen for their ability to handle categorical features directly and their strong performance in similar tasks. XGBoost hyperparameters were tuned using Optuna.
+
+Training notebooks, detailing the model architectures and training procedures, are available in this directory:
 🔗 [`Training`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Training)
 
-Corresponding model weights are saved under:  
+The trained model weights and configurations are saved for reproducibility and evaluation:
 🔗 [`Saved Models`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Saved%20Models)
-
-These can be loaded to reproduce or evaluate predictions using the matching encoded test data.
 
 ---
 
 ### 📊 Data Exploration & Feature Validation
 
-Our early investigations into the dataset involved identifying key issues like **distribution shift** between training and test datasets. This also helped us drive our feature selection decisions.
+Our initial exploration focused on understanding the dataset's characteristics, including data types, missing values, and the crucial issue of distribution shift between the training and test sets. We employed techniques like visualization and statistical tests (KS 2-sample and Chi-square) to quantify these differences, which informed our feature selection strategies.
 
-All notebooks related to EDA and initial exploration can be found here:  
-🔗 [`Data Exploration and Initial Approaches`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Data%20Exploration%20and%20Initial%20Approaches)
+Notebooks documenting our exploratory data analysis and feature validation processes can be found here:
+🔗 [`Data Exploration and Initial Approaches`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Data%20Exploration)
 
 ---
 
 ### 📤 Kaggle Submissions
 
-The final `.csv` files generated for submission to Kaggle were built using scripts that:
-- Load trained models
-- Apply consistent encodings
-- Format predictions per competition guidelines
+The generation of `.csv` files for submission to the Kaggle competition involved loading our trained models, applying the corresponding saved encoders to the test data, and formatting the predictions according to the competition's requirements.
 
-All such scripts are stored here:  
-🔗 [`Submissions`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/Submissions)
+Scripts used for generating Kaggle submission files are located here:
+🔗 [`Submissions`](https://github.com/Jithin-Veeragandham/CS6140-Project/tree/main/submission-noteboooks)
 
 ---
 
-## ✅ Summary
+## ✅ Summary of Findings
 
-This repository encapsulates our end-to-end pipeline for tackling Microsoft’s malware prediction problem — from encoding strategies and data exploration to model training and final submissions. Due to storage constraints, raw data and processed datasets were handled locally, but the full codebase is provided to ensure full reproducibility and transparency.
+Our comprehensive experimentation revealed several key insights:
+
+- For **advanced encodings**, deeper neural networks generally exhibited superior performance on Kaggle's public leaderboard, suggesting their ability to capture the complexity of engineered features. However, tree-based models showed strong validation accuracy.
+- With **initial encodings**, simpler neural network architectures often outperformed more complex ones in validation, while XGBoost consistently demonstrated strong performance across both validation and Kaggle private scores.
+- A significant **distribution shift** between the training and test datasets was identified, which likely impacted the generalization of our models and the correlation between validation scores and Kaggle leaderboard performance.
+- Feature selection using PCA and LDA did not consistently improve performance over using the full feature set, suggesting that the engineered features in the advanced encoding and the original features in the initial encoding contained valuable predictive information.
 
 ---
+
+## 🛠️ Potential Improvements
+
+Future work could explore:
+
+- More sophisticated techniques for addressing the observed distribution shift, beyond simply training on the separate datasets.
+- Investigating alternative neural network architectures, such as Recurrent Neural Networks (RNNs) or Transformer networks, to capture potential sequential patterns in the telemetry data.
+- Further experimentation with ensemble methods, combining the strengths of different models (e.g., stacking).
+- If access were available, incorporating external datasets (as done by top competitors) to enrich the feature set with information like software release dates and update intervals.
+- Optimizing model inference speed for real-world deployment scenarios.
+
+---
+
+## ⚙️ Installation/Setup (Optional)
+
+To reproduce parts of this project (assuming access to the preprocessed data and saved artifacts), the following Python libraries are required:
