@@ -2,7 +2,7 @@
 
 > Predicting malware occurrences on machines using real-world telemetry data provided by Microsoft.
 
-## 🧠 Contributors
+##  Contributors:
 
 - Jithin Veeragandham  
 - Rishi Srikaanth  
