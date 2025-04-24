@@ -73,29 +73,16 @@ Scripts used for generating Kaggle submission files are located here:
 
 ---
 
-## ✅ Summary of Findings
-
-Our comprehensive experimentation revealed several key insights:
-
-- For **advanced encodings**, deeper neural networks generally exhibited superior performance on Kaggle's public leaderboard, suggesting their ability to capture the complexity of engineered features. However, tree-based models showed strong validation accuracy.
-- With **initial encodings**, simpler neural network architectures often outperformed more complex ones in validation, while XGBoost consistently demonstrated strong performance across both validation and Kaggle private scores.
-- A significant **distribution shift** between the training and test datasets was identified, which likely impacted the generalization of our models and the correlation between validation scores and Kaggle leaderboard performance.
-- Feature selection using PCA and LDA did not consistently improve performance over using the full feature set, suggesting that the engineered features in the advanced encoding and the original features in the initial encoding contained valuable predictive information.
-
----
 
 ## 🛠️ Potential Improvements
 
 Future work could explore:
 
-- More sophisticated techniques for addressing the observed distribution shift, beyond simply training on the separate datasets.
-- Investigating alternative neural network architectures, such as Recurrent Neural Networks (RNNs) or Transformer networks, to capture potential sequential patterns in the telemetry data.
+- More sophisticated techniques for addressing the observed distribution shift
+- Investigating alternative neural network architectures like Resnet to keep training on deeper architectures.
 - Further experimentation with ensemble methods, combining the strengths of different models (e.g., stacking).
 - If access were available, incorporating external datasets (as done by top competitors) to enrich the feature set with information like software release dates and update intervals.
-- Optimizing model inference speed for real-world deployment scenarios.
+
 
 ---
 
-## ⚙️ Installation/Setup (Optional)
-
-To reproduce parts of this project (assuming access to the preprocessed data and saved artifacts), the following Python libraries are required:
