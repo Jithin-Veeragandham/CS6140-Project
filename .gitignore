@@ -12,3 +12,4 @@ Processed Datasets/train_data_kaggle_processed.csv
 Processed Datasets/validation_data_kaggle_processed.csv
 Processed Datasets/kaggle_encoded_train.csv
 Processed Datasets
+.DS_Store
